@@ -30,7 +30,7 @@ jobs:
       - name: Install needed tools
         run: |
           sudo apt-get update
-          sudo apt-get install gcc-arm-none-eabi
+          sudo apt-get install -y gcc-arm-none-eabi build-essential bc libncurses5 dialog u-boot-tools git libncurses-dev lib32z1 lib32ncurses5-dev libmpc-dev libmpfr-dev libgmp3-dev flex bison debootstrap debian-archive-keyring qemu-user-static
           
       # Runs a single command using the runners shell
       - name: run build script with ghrunner config
