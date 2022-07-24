@@ -12,7 +12,7 @@ echo -n '012345678912' | dd of=/dev/mtd0 bs=1 seek=1046576 conv=notrunc
 0x00016660 (91744)		- ?? End of bootloader ??
 
 0x000cf9c0 (850368)		- (0x000cf9c4-0x000cf9dc) "WD_Glacier_DB-88F6720-V2"
-0x000cfb00 (850688)		- "Armada-375-Customer-Board-0"
+0x000cfb00 (850688)		- "Armada-385-Customer-Board-0"
 
 0x000e2d40 (929088)		- End of data
 - empty -

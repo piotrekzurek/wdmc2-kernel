@@ -1,10 +1,10 @@
 # build tools for wdmc-gen2
-## WD My Cloud Gen2 based on Marvell ARMADA 375
+## WD My Cloud Gen2 based on Marvell ARMADA 385
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=HXWRU82YBV7HC&source=url)
 
 * mainline kernel support tested with 4.18 / 5.6 / 5.8 / 5.10 / 5.11 / 5.12 / 5.13 / 5.14 / 5.15
-	- device tree source ./dts/armada-375-wdmc-gen2.dts
+	- device tree source ./dts/armada-385-wdmc-Ex2-Ultra.dts
 	- kernel config for various kernels included check ./config/
 	- some tweaks and pointers in txt files ./docs/
 	- toolchain for building old kernels is included as txz ./toolchain/ . I suggest using the gcc-arm-none-eabi toolchain via apt!
