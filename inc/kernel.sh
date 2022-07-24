@@ -13,7 +13,7 @@ build_kernel()
         kernel_config="config/linux-$kernel_branch.config";
     fi
 
-    if [[ $GHRUNNER == 'on' ]]; then
+    if [[ $GHRUNNER == "on" ]]; then
         rm -rf "${output_dir}"
     fi
 
@@ -29,7 +29,7 @@ build_kernel()
         # git clone linux tree
         git clone --branch "$kernel_branch" --depth 1 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git "${kernel_dir}"
     else
-        if [ ${CLEAN_KERNEL_SRC} = 'on' ]; then
+        if [ ${CLEAN_KERNEL_SRC} = "on" ]; then
             echo "### Kernel dir does exist. Fetching and cleaning"
 
             cd ${kernel_dir}
@@ -79,7 +79,7 @@ build_kernel()
 
     echo "### Starting make"
 
-    if [ ${ALLOW_KERNEL_CONFIG_CHANGES} = 'on' ]; then
+    if [ ${ALLOW_KERNEL_CONFIG_CHANGES} = "on" ]; then
         $makehelp menuconfig
     fi
     echo "### Making 'olddefconfig' if there's any changes to upstream config"
@@ -129,7 +129,7 @@ build_kernel()
     cd "${current_dir}"
 
     # abort point for github runner to keep it from messing with permissions
-    if [[ $GHRUNNER == 'on' ]]; then
+    if [[ $GHRUNNER == "on" ]]; then
         exit 0
     fi
 
