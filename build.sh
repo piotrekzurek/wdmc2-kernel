@@ -42,7 +42,7 @@ if [[ "${EUID}" != "0" ]] && [[ $GHRUNNER != "on" ]]; then
     exit 1
 fi
 
-if [[ $GHRUNNER != "on" ]]; then
+if [[ $GHRUNNER = "on" ]]; then
     echo "### Will try to use apt to install prerequisites."
     apt-get install build-essential bc libncurses5 dialog u-boot-tools git libncurses-dev lib32z1 lib32ncurses5-dev libmpc-dev libmpfr-dev libgmp3-dev flex bison debootstrap debian-archive-keyring qemu-user-static gcc-arm-none-eabi
 fi
