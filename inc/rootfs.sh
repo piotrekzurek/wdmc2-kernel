@@ -112,12 +112,12 @@ EOF
     echo ${def_hostname} > ${rootfs_dir}/etc/hostname
 
     # Enable zram (swap and logging)
-    if [[ ${ZRAM_ENABLED} == "on" ]]; then
+    if [[ ${ZRAM_ENABLED} == 'on' ]]; then
         chroot ${rootfs_dir} systemctl enable armbian-zram-config.service
         chroot ${rootfs_dir} systemctl enable armbian-ramlog.service
     fi
 
-    if [[ ${BUILD_KERNEL} == "on" ]]; then
+    if [[ ${BUILD_KERNEL} == 'on' ]]; then
         cp "${boot_dir}"/uRamdisk "${rootfs_dir}"/boot/
         cp "${boot_dir}"/uImage-$kernel_version "${rootfs_dir}"/boot/
         cp "${boot_dir}"/uImage-$kernel_version "${rootfs_dir}"/boot/uImage
@@ -125,16 +125,16 @@ EOF
     fi
 
     cp build_initramfs.sh "${rootfs_dir}"/root/
-    if [[ ${BUILD_INITRAMFS} == "on" ]]; then
+    if [[ ${BUILD_INITRAMFS} == 'on' ]]; then
         chroot "${rootfs_dir}" /bin/bash -c "/root/build_initramfs.sh --update"
     fi
 
-    if [[ ${ALLOW_ROOTFS_CHANGES} == "on" ]]; then
+    if [[ ${ALLOW_ROOTFS_CHANGES} == 'on' ]]; then
         echo "### You can now adjust the rootfs in output/rootfs/"
         read -r -p "### Press any key to continue..." -n1
     fi
 
-    if [[ ${ALLOW_CMDLINE_CHANGES} == "on" ]]; then
+    if [[ ${ALLOW_CMDLINE_CHANGES} == 'on' ]]; then
         echo "### Will now enter a root bash in the new rootfs"
         echo "### Once you are done making changes, 'exit' to continue..."
         chroot "${rootfs_dir}" /bin/bash

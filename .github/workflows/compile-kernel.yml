@@ -26,7 +26,12 @@ jobs:
       - uses: actions/checkout@v2
         with: 
           clean: 'false'
-      
+
+     - name: Install needed tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential bc libncurses5 dialog u-boot-tools git libncurses-dev lib32z1 lib32ncurses5-dev libmpc-dev libmpfr-dev libgmp3-dev flex bison debootstrap debian-archive-keyring qemu-user-static gcc-arm-none-eabi
+          
       # Runs a single command using the runners shell
       - name: run build script with ghrunner config
         run: ./build.sh --ghrunner --kernel --clean --kernelbranch linux-5.18.y

@@ -37,12 +37,12 @@ makehelp='make CROSS_COMPILE=/usr/bin/arm-none-eabi- ARCH=arm'                  
 # start by reading command line arguments
 read_arguments "$@"
 
-if [[ "${EUID}" != "0" ]] && [[ $GHRUNNER != "on" ]]; then
+if [[ "${EUID}" != "0" ]] && [[ $GHRUNNER != 'on' ]]; then
     echo "This script requires root privileges, please rerun using sudo"
     exit 1
 fi
 
-if [[ $GHRUNNER = "on" ]]; then
+if [[ $GHRUNNER != 'on' ]]; then
     echo "### Will try to use apt to install prerequisites."
     apt-get install build-essential bc libncurses5 dialog u-boot-tools git libncurses-dev lib32z1 lib32ncurses5-dev libmpc-dev libmpfr-dev libgmp3-dev flex bison debootstrap debian-archive-keyring qemu-user-static gcc-arm-none-eabi
 fi
@@ -60,15 +60,15 @@ DIALOG_WIDTH=$((${dsize[1]} - 8))
 if [[ -z $BUILD_KERNEL ]] && [[ -z $BUILD_ROOTFS ]]; then
 
     # set sensible defaults
-    BUILD_KERNEL="on"
-    CLEAN_KERNEL_SRC="on"
+    BUILD_KERNEL='on'
+    CLEAN_KERNEL_SRC='on'
     ALLOW_KERNEL_CONFIG_CHANGES='off'
 
-    BUILD_ROOTFS="on"
+    BUILD_ROOTFS='on'
     ALLOW_ROOTFS_CHANGES='off'
     ALLOW_CMDLINE_CHANGES='off'
     ASK_EXTRA_PKGS='off'
-    ZRAM_ENABLED="on"
+    ZRAM_ENABLED='on'
 
     # Show user checklist to select
     display_checklist "Build setup" "Select components and options for build:" \
@@ -91,22 +91,22 @@ if [[ -z $BUILD_KERNEL ]] && [[ -z $BUILD_ROOTFS ]]; then
     ASK_EXTRA_PKGS='off'
     ZRAM_ENABLED='off'
 
-    [[ $selection == *1* ]] && BUILD_KERNEL="on"
-    [[ $selection == *2* ]] && CLEAN_KERNEL_SRC="on"
-    [[ $selection == *3* ]] && ALLOW_KERNEL_CONFIG_CHANGES="on"
-    [[ $selection == *4* ]] && BUILD_ROOTFS="on"
-    [[ $selection == *5* ]] && ALLOW_ROOTFS_CHANGES="on"
-    [[ $selection == *6* ]] && ALLOW_CMDLINE_CHANGES="on"
-    [[ $selection == *7* ]] && ASK_EXTRA_PKGS="on"
-    [[ $selection == *8* ]] && ZRAM_ENABLED="on"
+    [[ $selection == *1* ]] && BUILD_KERNEL='on'
+    [[ $selection == *2* ]] && CLEAN_KERNEL_SRC='on'
+    [[ $selection == *3* ]] && ALLOW_KERNEL_CONFIG_CHANGES='on'
+    [[ $selection == *4* ]] && BUILD_ROOTFS='on'
+    [[ $selection == *5* ]] && ALLOW_ROOTFS_CHANGES='on'
+    [[ $selection == *6* ]] && ALLOW_CMDLINE_CHANGES='on'
+    [[ $selection == *7* ]] && ASK_EXTRA_PKGS='on'
+    [[ $selection == *8* ]] && ZRAM_ENABLED='on'
 
 else # at least kernel or rootfs has been selected via command line, check other options and set defaults
-    [[ -z $CLEAN_KERNEL_SRC  ]] && CLEAN_KERNEL_SRC="on"
+    [[ -z $CLEAN_KERNEL_SRC  ]] && CLEAN_KERNEL_SRC='on'
     [[ -z $ALLOW_KERNEL_CONFIG_CHANGES  ]] && ALLOW_KERNEL_CONFIG_CHANGES='off'
 
     [[ -z $ALLOW_ROOTFS_CHANGES  ]] && ALLOW_ROOTFS_CHANGES='off' 
     [[ -z $ASK_EXTRA_PKGS  ]] && ASK_EXTRA_PKGS='off'
-    [[ -z $ZRAM_ENABLED  ]] && ZRAM_ENABLED="on"
+    [[ -z $ZRAM_ENABLED  ]] && ZRAM_ENABLED='on'
 fi
 
 
@@ -151,7 +151,7 @@ if [[ $BUILD_ROOTFS == "on" ]] && [[ -z $BUILD_INITRAMFS ]]; then
 
     BUILD_INITRAMFS='off'
 
-    [[ $selection == "y" ]] && BUILD_INITRAMFS="on"
+    [[ $selection == "y" ]] && BUILD_INITRAMFS='on'
 fi
 
 # get details for building the rootfs
@@ -164,7 +164,7 @@ if [[ $BUILD_ROOTFS == "on" ]]; then
         release=$selection
     fi
 
-    if [[ "$ASK_EXTRA_PKGS" == "on" ]]; then
+    if [[ "$ASK_EXTRA_PKGS" == 'on' ]]; then
         display_input "Rootfs creation" "Type in any extra apt packages you want install. (Space seperated)" "$EXTRA_PKGS"
         EXTRA_PKGS="$selection"
     fi

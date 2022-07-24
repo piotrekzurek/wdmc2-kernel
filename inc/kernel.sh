@@ -29,7 +29,7 @@ build_kernel()
         # git clone linux tree
         git clone --branch "$kernel_branch" --depth 1 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git "${kernel_dir}"
     else
-        if [ ${CLEAN_KERNEL_SRC} = "on" ]; then
+        if [ ${CLEAN_KERNEL_SRC} = 'on' ]; then
             echo "### Kernel dir does exist. Fetching and cleaning"
 
             cd ${kernel_dir}
@@ -79,7 +79,7 @@ build_kernel()
 
     echo "### Starting make"
 
-    if [ ${ALLOW_KERNEL_CONFIG_CHANGES} = "on" ]; then
+    if [ ${ALLOW_KERNEL_CONFIG_CHANGES} = 'on' ]; then
         $makehelp menuconfig
     fi
     echo "### Making 'olddefconfig' if there's any changes to upstream config"

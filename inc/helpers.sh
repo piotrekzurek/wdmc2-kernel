@@ -27,7 +27,7 @@ display_yesno() {
       selection='off'
       ;;
     $DIALOG_OK)
-      selection="on"
+      selection='on'
       ;;
   esac
 }
@@ -121,39 +121,39 @@ read_arguments() {
         case $key in
             # feature selection
             --kernel)
-                BUILD_KERNEL="on"
+                BUILD_KERNEL='on'
                 shift;
             ;;
             --clean)
-                CLEAN_KERNEL_SRC="on"
+                CLEAN_KERNEL_SRC='on'
                 shift;
             ;;
             --config)
-                ALLOW_KERNEL_CONFIG_CHANGES="on"
+                ALLOW_KERNEL_CONFIG_CHANGES='on'
                 shift;
             ;;
 
 
             --rootfs)
-                BUILD_ROOTFS="on"
+                BUILD_ROOTFS='on'
                 shift;
             ;;
             --changes)
-                ALLOW_ROOTFS_CHANGES="on"
+                ALLOW_ROOTFS_CHANGES='on'
                 shift;
             ;;
             --initramfs)
-	            BUILD_INITRAMFS="on"
+	            BUILD_INITRAMFS='on'
 	            shift;
             ;;
             --cmdline)
-                ALLOW_CMDLINE_CHANGES="on"
+                ALLOW_CMDLINE_CHANGES='on'
                 shift;
             ;;
 
 
             --ghrunner)
-                GHRUNNER="on"
+                GHRUNNER='on'
                 THREADS=2
                 shift;
             ;;
@@ -178,7 +178,7 @@ read_arguments() {
                 shift; shift;
             ;;
             --zram)
-                ZRAM_ENABLED="on"
+                ZRAM_ENABLED='on'
                 shift;
             ;;
 
