@@ -82,6 +82,7 @@ build_kernel()
     if [ ${ALLOW_KERNEL_CONFIG_CHANGES} = 'on' ]; then
         $makehelp menuconfig
     fi
+    echo "### Making 'olddefconfig' if there's any changes to upstream config"
     $makehelp olddefconfig
     $makehelp -j${THREADS} zImage
     $makehelp -j${THREADS} armada-385-wdmc-Ex2-Ultra.dts
