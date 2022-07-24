@@ -82,6 +82,7 @@ build_kernel()
     if [ ${ALLOW_KERNEL_CONFIG_CHANGES} = 'on' ]; then
         $makehelp menuconfig
     fi
+    $makehelp olddefconfig
     $makehelp -j${THREADS} zImage
     $makehelp -j${THREADS} armada-385-wdmc-Ex2-Ultra.dts
     cat arch/arm/boot/zImage arch/arm/boot/dts/armada-385-wdmc-Ex2-Ultra.dts > zImage_and_dtb
