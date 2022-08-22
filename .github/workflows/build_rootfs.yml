@@ -38,7 +38,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: run rootfs build script with ghrunner config
-        run: ./build.sh  --ghrunner --rootfs --release bullseye --initramfs --root-pw 1234 --hostname wdmcex2u --zram --boot usb
+        run: sudo ./build.sh  --ghrunner --rootfs --release bullseye --initramfs --root-pw 1234 --hostname wdmcex2u --zram --boot usb
 
       # Upload build results
       - uses: actions/upload-artifact@v2
