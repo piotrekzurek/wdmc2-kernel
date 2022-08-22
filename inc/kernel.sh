@@ -85,8 +85,8 @@ build_kernel()
     echo "### Making 'olddefconfig' if there's any changes to upstream config"
     $makehelp olddefconfig
     $makehelp -j${THREADS} zImage
-    $makehelp -j${THREADS} armada-385-wdmc-Ex2-Ultra.dts
-    cat arch/arm/boot/zImage arch/arm/boot/dts/armada-385-wdmc-Ex2-Ultra.dts > zImage_and_dtb
+    $makehelp -j${THREADS} armada-385-wdmc-Ex2-Ultra.dtb
+    cat arch/arm/boot/zImage arch/arm/boot/dts/armada-385-wdmc-Ex2-Ultra.dtb > zImage_and_dtb
     mkimage -A arm -O linux -T kernel -C none -a 0x00008000 -e 0x00008000 -n 'WDMC-EX2-Ultra' -d zImage_and_dtb "${boot_dir}"/uImage-${kernel_version}
     rm zImage_and_dtb
 
