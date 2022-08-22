@@ -1,0 +1,43 @@
+# This is a basic workflow to help you get started with Actions
+
+name: compile kernel using ghrunner settings
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  #pull_request:
+  #  branches: [ master ]
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch: 
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build-kernel:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+  
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        with: 
+          clean: 'false'
+
+      - name: Install needed tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-none-eabi build-essential bc libncurses5 dialog u-boot-tools git libncurses-dev lib32z1 lib32ncurses5-dev libmpc-dev libmpfr-dev libgmp3-dev flex bison debootstrap debian-archive-keyring qemu-user-static
+          
+      # Runs a single command using the runners shell
+      - name: run build script with ghrunner config
+        run: ./build.sh --ghrunner --kernel --clean --kernelbranch linux-5.18.y --rootfs --release bullseye
+  
+      # Upload build results
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build-results
+          path: output/*.tar.gz     
