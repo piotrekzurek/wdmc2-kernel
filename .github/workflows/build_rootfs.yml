@@ -34,7 +34,7 @@ jobs:
           
       # Runs a single command using the runners shell
       - name: run build script with ghrunner config
-        run: ./build.sh --ghrunner --kernel --clean --kernelbranch linux-5.18.y --rootfs --release bullseye --initramfs --root-pw 1234 --hostname wcmcex2ultra --zram --boot usb
+        run: ./build.sh --kernel --clean --kernelbranch linux-5.18.y --rootfs --release bullseye --initramfs --root-pw 1234 --hostname wdmcex2u --zram --boot usb --ghrunner 
 
       # Upload build results
       - uses: actions/upload-artifact@v2
