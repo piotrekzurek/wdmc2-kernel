@@ -12,6 +12,11 @@ on:
   
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch: 
+    inputs:
+      kernelversion:
+        description: 'Kernel version'     
+        required: true
+        default: 'linux-5.18.y'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -34,7 +39,7 @@ jobs:
           
       # Runs a single command using the runners shell
       - name: run build script with ghrunner config
-        run: ./build.sh --ghrunner --kernel --clean --kernelbranch linux-5.17.y
+        run: ./build.sh --ghrunner --kernel --clean --kernelbranch ${{ github.event.inputs.kernelversion }}
   
       # Upload build results
       - uses: actions/upload-artifact@v2
