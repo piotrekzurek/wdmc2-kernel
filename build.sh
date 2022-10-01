@@ -114,6 +114,7 @@ fi
 if [[ $BUILD_KERNEL == "on" ]] && [ -z "$kernel_branch" ]; then
     display_select "Kernel Building" "Please select the Linux Kernel branch to build." \
         "4.18" "Linux kernel 4.18" \
+        "5.5" "Linux kernel 5.5" \
         "5.6" "Linux kernel 5.6" \
         "5.8" "Linux kernel 5.8" \
         "5.10" "Linux kernel 5.10 LTS" \
@@ -128,13 +129,13 @@ if [[ $BUILD_KERNEL == "on" ]] && [ -z "$kernel_branch" ]; then
 
     ############################################################
     # Required gcc:
-    #  armada370-gcc464_glibc215_hard_armada-GPL.txz (included in git)    FOR KERNEL VERSION <= 5.6
-    #  gcc-arm-none-eabi (downloadable via apt)         FOR KERNEL VERSION >= 5.6
+    #  armada370-gcc464_glibc215_hard_armada-GPL.txz (included in git)    FOR KERNEL VERSION <= 5.5
+    #  gcc-arm-none-eabi (downloadable via apt)         FOR KERNEL VERSION >= 5.5
     # check toolchain subfolder for these or install via apt
     # Adjust makehelp to match path to your gcc:
     ############################################################
     if [[ $selection == "4.18" ]]; then
-        makehelp='make CROSS_COMPILE=/opt/arm-marvell-linux-gnueabi/bin/arm-marvell-linux-gnueabi- ARCH=arm'   #FOR KERNEL VERSION <= 5.6 (via txz)
+        makehelp='make CROSS_COMPILE=/opt/arm-marvell-linux-gnueabi/bin/arm-marvell-linux-gnueabi- ARCH=arm'   #FOR KERNEL VERSION <= 5.5 (via txz)
         display_result "Warning" "You have selected Linux Kernel 4.18, this will be build with older armada370 gcc464 toolchain, make sure you have extracted the txz file available in toolchain folder to /opt/"
     fi
 
