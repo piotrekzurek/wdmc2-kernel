@@ -90,10 +90,10 @@ if [ "\${root}"x != "/dev/ram"x ]; then
 fi
 
 # try 2nd partition on usb
-if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sdb1 ] && [ -b /dev/sdb2 ]; then
-	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sdb2 /newroot
+if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ] && [ -b /dev/sda2 ]; then
+	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sda2 /newroot
 	if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ]; then
-		umount /dev/sdb2
+		umount /dev/sda2
 	fi
 fi
 
@@ -116,9 +116,9 @@ if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ] 
 fi
 
 # WD My Cloud: turn led solid blue
-echo none > /sys/class/leds/system-blue/trigger
-echo default-on > /sys/class/leds/system-green/trigger
-echo ide-disk > /sys/class/leds/system-red/trigger
+#echo none > /sys/class/leds/system-blue/trigger
+#echo default-on > /sys/class/leds/system-green/trigger
+#echo ide-disk > /sys/class/leds/system-red/trigger
 
 # WD My Cloud: get mac from nand
 ip link set dev eth0 address \$(dd if=/dev/mtd0 bs=1 skip=1046528 count=17 2>/dev/null)
