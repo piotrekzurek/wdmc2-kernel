@@ -1,0 +1,9 @@
+setenv mtdparts mtdparts=armada-nand:5m(u-boot)ro,6m@5m(uImage),5m@11m(uRamdisk),185m@16m(image.cfs),15m@201m(rescue_fw),20m@216m(config),10m@236m(reserve1),9m@246m(reserve2)
+
+
+setenv bootcmd 'nand nand read.e 0x02000020 0x0500000 0x0600000; nand read.e 0x2900000 0x0b00000 0x0a00000; bootm 0x02000020 0x2900000'
+
+
+setenv bootargs root=/dev/ram console=ttyS0,115200
+setenv bootcmd 'nand read.e 0x0a00000 0x0500000 0x0500000;nand read.e 0x2000000 0x0a00000 0x0500000;bootm 0x0a00000 0x2000000'
+saveenv
