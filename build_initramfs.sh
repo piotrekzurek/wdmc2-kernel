@@ -37,6 +37,10 @@ cp $(ldd "/bin/busybox" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
 cp -a /sbin/e2fsck ${INITRAMFS_ROOT}/sbin/e2fsck
 cp $(ldd "/sbin/e2fsck" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
 
+cp -a /sbin/*btrfs ${INITRAMFS_ROOT}/sbin
+cp -a /bin/btrfs* ${INITRAMFS_ROOT}/bin
+cp -a /lib/x86_64-linux-gnu/liblzo2.so.2  ${INITRAMFS_ROOT}/lib/x86_64-linux-gnu/liblzo2.so.2
+
 cat << EOF > ${INITRAMFS_ROOT}/init
 #!/bin/busybox sh
 /bin/busybox --install

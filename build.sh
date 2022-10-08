@@ -31,7 +31,7 @@ current_user="$(stat --format %U "${current_dir}"/.git)"
 ############################################################
 GHRUNNER='off'
 THREADS=8
-EXTRA_PKGS='bash-completion htop'
+EXTRA_PKGS='bash-completion htop btrfs-progs liblzo2-2'
 makehelp='make CROSS_COMPILE=/usr/bin/arm-none-eabi- ARCH=arm'                                         #FOR KERNEL VERSION >= 5.6 (via apt)
 
 # start by reading command line arguments
