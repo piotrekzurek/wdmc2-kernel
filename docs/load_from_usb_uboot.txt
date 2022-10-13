@@ -1,0 +1,53 @@
+Linki: 
+https://anionix.ddns.net/WDMyCloud/
+https://anionix.ddns.net/WDMyCloud/Other/Official_linux_kernel/
+
+
+usb start
+
+setenv mtdparts 'mtdparts=armada-nand:5m(u-boot)ro,5m@5m(uImage),5m@10m(uRamdisk),220m@35m(reserve)'
+
+
+setenv bootargs 'root=LABEL=usbrootfs console=ttyS0,115200 earlyprintk=serial'
+boot
+exec switch_root /newroot /sbin/init
+
+setenv bootargs 'root=/dev/ram console=ttyS0,115200 earlyprintk=serial init=/init'
+
+-------------------------------------------------------------------------------------
+> mtdparts      
+
+device nand0 <armada-nand>, # parts = 3
+ #: name                size            offset          mask_flags
+ 0: u-boot              0x000000500000          0x000000000000          1
+ 1: uImage              0x000000f00000          0x000000500000          0
+ 2: uRamdisk            0x000000f00000          0x000001400000          0
+ 3: reserve             0x00000dc00000          0x000002300000          0
+
+active partition: nand0,0 - (u-boot) 0x000000500000 @ 0x000000000000
+
+defaults:
+mtdids  : none
+mtdparts: none
+-------------------------------------------------------------------------------------
+
+# Erase uImage partition as per offset and size above
+nand erase 0x000000500000   
+
+# Erase uRamdisk partition as per offset and size above
+nand erase 0x000001400000 0x000000f00000
+
+# Load uImage into memory at offset 0xa00000
+fatload usb 0:1 0x02000000 uImage
+
+# Load uRamdisk into memory at offset 0xf00000
+fatload usb 0:1 0xf00000 uRamdisk
+
+# Write uImage from memory to nand
+nand write 0x02000000 0x000000500000 0x40f821
+
+# Write uRamdisk from memory to nand
+nand write 0xf00000 0x000001400000 0x18c268
+
+setenv bootcmd 'nand read.e 0x02000000 0x000000500000 0x000000f00000; nand read.e 0x2900000 0x000001400000 0x000000f00000; bootm 0x02000000 0x2900000'
+saveenv

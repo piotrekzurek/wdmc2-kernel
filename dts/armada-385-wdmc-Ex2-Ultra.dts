@@ -194,37 +194,18 @@
 
 						partition@00500000 {
 							label = "uImage";
-							reg = <0x00500000 0x00500000>;    /*   5 MB */
+							reg = <0x00500000 0x01400000>;    /*   15 MB */
 						};
 
-						partition@00a00000 {
+						partition@01400000 {
 							label = "uRamdisk";
-							reg = <0x00a00000 0x00500000>;    /*   5 MB */
-						};
-							
-						partition@00f00000 {
-							label = "image.cfs";
-							reg = <0x00f00000 0x0b900000>;    /* 185 MB */
+							reg = <0x01400000 0x02300000>;    /*   15 MB */
 						};
 
-						partition@c800000 {
-							label = "rescue fw";
-							reg = <0x0c800000 0x00f00000>;    /*  15 MB */
-						};
-							
-						partition@d70000 {
-							label = "config";
-							reg = <0x0d700000 0x01400000>;    /*  20 MB */
-						};
-							
-						partition@eb00000 {
-							label = "reserve1";
-							reg = <0x0eb00000 0x00a00000>;    /*  10 MB */
-						};
-							
-						partition@f500000 {
-							label = "reserve2";
-							reg = <0x0f500000 0x00a00000>;    /*  10 MB */
+
+						partition@2300000 {
+							label = "reserve";
+							reg = <0x02300000 0x0FF00000>;    /*   220 MB */
 						};
 					};
 				};
