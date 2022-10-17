@@ -58,7 +58,6 @@ nand write 0x02000000 0x000000f00000 0x000000500000
 nand write 0x02000000 0x000001900000 0x000000500000
 
 # Write uRamdisk from memory to nand
-nand write 0xf00000 0x000000a00000 0x000000500000
 nand write 0xf00000 0x000001400000 0x000000500000
 nand write 0xf00000 0x000001e00000 0x000000500000
 
@@ -71,3 +70,11 @@ setenv bootcmd 'nand read.e 0x02000000 0x000000f00000 0x000000500000; nand read.
 
 # Set boot from -test mtd parts
 setenv bootcmd 'nand read.e 0x02000000 0x000001900000 0x000000500000; nand read.e 0x2900000 0x000001e00000 0x000000500000; bootm 0x02000000 0x2900000'
+
+
+
+# Write to mtd partitions at OS level:
+dd if=/dev/zero of=/dev/mtdblock1
+dd if=uImage of=/dev/mtdblock1
+dd if=/dev/zero of=/dev/mtdblock2
+dd if=uInitrd of=/dev/mtdblock2
