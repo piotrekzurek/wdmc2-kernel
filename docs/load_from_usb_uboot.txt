@@ -40,8 +40,7 @@ nand erase 0x000000500000 0x000000500000
 nand erase 0x000000f00000 0x000000500000
 nand erase 0x000001900000 0x000000500000
 
-# Erase uRamdisk parti
-tion as per offset and size above
+# Erase uRamdisk partition as per offset and size above
 nand erase 0x000000a00000 0x000000500000
 nand erase 0x000001400000 0x000000500000
 nand erase 0x000001e00000 0x000000500000
@@ -58,7 +57,8 @@ nand write 0x02000000 0x000000f00000 0x000000500000
 nand write 0x02000000 0x000001900000 0x000000500000
 
 # Write uRamdisk from memory to nand
-nand write 0xf00000 0x000001400000 0x000000500000
+nand write 0xf00000 0x000000a00000 0x000000500000
+nand write 0xf00000 0x000001e00000 0x000000500000
 nand write 0xf00000 0x000001e00000 0x000000500000
 
 # Set boot from primary mtd parts
@@ -67,14 +67,28 @@ saveenv
 
 # Set boot from -old mtd parts
 setenv bootcmd 'nand read.e 0x02000000 0x000000f00000 0x000000500000; nand read.e 0x2900000 0x000001400000 0x000000500000; bootm 0x02000000 0x2900000'
+saveenv
+reset
 
 # Set boot from -test mtd parts
 setenv bootcmd 'nand read.e 0x02000000 0x000001900000 0x000000500000; nand read.e 0x2900000 0x000001e00000 0x000000500000; bootm 0x02000000 0x2900000'
+saveenv
+reset
 
-
-
-# Write to mtd partitions at OS level:
+# Write primary uImage and uRamdisk images to mtd partitions at OS level:
 dd if=/dev/zero of=/dev/mtdblock1
 dd if=uImage of=/dev/mtdblock1
 dd if=/dev/zero of=/dev/mtdblock2
-dd if=uInitrd of=/dev/mtdblock2
+dd if=uRamdisk of=/dev/mtdblock2
+
+# Write old uImage and uRamdisk images to mtd partitions at OS level:
+dd if=/dev/zero of=/dev/mtdblock3
+dd if=/boot/uImage.old of=/dev/mtdblock3
+dd if=/dev/zero of=/dev/mtdblock4
+dd if=/boot/uRamdisk.old of=/dev/mtdblock4
+
+# Write testing uImage and uRamdisk images to mtd partitions at OS level:
+dd if=/dev/zero of=/dev/mtdblock5
+dd if=/boot/uImage.test of=/dev/mtdblock5
+dd if=/dev/zero of=/dev/mtdblock6
+dd if=/boot/uRamdisk.test of=/dev/mtdblock6
