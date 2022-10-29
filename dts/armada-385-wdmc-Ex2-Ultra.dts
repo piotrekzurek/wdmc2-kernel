@@ -222,9 +222,14 @@
 							reg = <0x01e00000 0x00500000>;    /*   5 MB */
 						};
 
-						partition@2300000 {
+						partition@01e00000 {
+							label = "reserve2";
+							reg = <0x02300000 0x00500000>;    /*   5 MB */
+						};
+
+						partition@2800000 {
 							label = "storage";
-							reg = <0x02300000 0x0dc00000>;    /*   220 MB */
+							reg = <0x02800000 0x0D700000>;    /*   215 MB */
 						};
 					};
 				};

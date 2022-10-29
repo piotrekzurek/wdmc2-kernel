@@ -124,8 +124,7 @@ fi
 #echo default-on > /sys/class/leds/system-green/trigger
 #echo ide-disk > /sys/class/leds/system-red/trigger
 
-# WD My Cloud: get mac from nand
-ip link set dev eth0 address \$(dd if=/dev/mtd0 bs=1 skip=1046528 count=17 2>/dev/null)
+# WD My Cloud: get mac from naip link set dev eth0 address \$(dd if=/dev/mtd0 bs=1 skip=1046528 count=17 2>/dev/null)
 
 # clean up.
 umount /sys /proc /dev
