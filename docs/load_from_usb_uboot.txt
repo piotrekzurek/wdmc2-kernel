@@ -49,9 +49,13 @@ nand erase 0x000001e00000 0x000000500000
 
 # Load uImage into memory at offset 0xa00000
 fatload usb 0:1 0x02000020 uImage
+fatload usb 0:1 0x02000020 uImage.old
+fatload usb 0:1 0x02000020 uImage.test
 
 # Load uRamdisk into memory at offset 0xf00000
 fatload usb 0:1 0xf00000 uRamdisk
+fatload usb 0:1 0xf00000 uRamdisk.old
+fatload usb 0:1 0xf00000 uRamdisk.test
 
 # Write uImage from memory to nand
 nand write 0x02000020 0x000000500000 0x000000500000
