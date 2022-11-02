@@ -98,3 +98,70 @@ dd if=/dev/zero of=/dev/mtdblock5
 dd if=/boot/uImage.test of=/dev/mtdblock5
 dd if=/dev/zero of=/dev/mtdblock6
 dd if=/boot/uRamdisk.test of=/dev/mtdblock6
+
+
+   21  mtdinfo 
+   29  mtd info
+   30  mtdinfo 
+   31  mtdinfo /dev/mtd0
+   32  mtdinfo /dev/mtd1
+   33  mtdinfo /dev/mtd2
+   34  mtdinfo /dev/mtd3
+   35  mtdinfo /dev/mtd4
+   36  mtdinfo /dev/mtd5
+   37  mtdinfo /dev/mtd6
+   38  mtdinfo /dev/mtd7
+   39  mtdpart 
+   40  mtdinfo
+   41  dd if=/dev/mtd1 of=/dev/mtd3
+   42  dd if=/dev/mtd1 of=/dev/mtd3 bs=1k count=5000
+   47  ls /dev/mtd*
+   48  mtdinfo 
+   49  mtdinfo /dev/mtd3
+   50  mtdinfo /dev/mtd4
+   51  # Write primary uImage and uRamdisk images to mtd partitions at OS level:
+   52  dd if=/dev/zero of=/dev/mtdblock3
+   53  dd if=uImage.old of=/dev/mtdblock3
+   54  dd if=/dev/zero of=/dev/mtdblock4
+   55  dd if=uRamdisk of=/dev/mtdblock4
+   56  dd if=/dev/zero of=/dev/mtdblock3
+   57  dd if=/boot/uImage.old of=/dev/mtdblock3
+   58  dd if=/dev/zero of=/dev/mtdblock4
+   59  dd if=/boot/uRamdisk of=/dev/mtdblock4
+   61  ls /dev/mtd*
+   64  flash_eraseall -j  /dev/mtd7
+   65  flash_otp_info /dev/mtd7
+   66  mount -t jffs2 /mnt/mtd7 /mnt/
+   71  mount -t jffs2 /dev/mtdblock7 /mnt/
+   82  mount -t jffs2 /mnt/mtd7 /mnt/
+   83  mount -t unifs /mnt/mtd7 /mnt/
+   84  mount -t ubifs /mnt/mtd7 /mnt/
+   88  ubinfo /dev/mtdblock2 
+   89  ubinfo /dev/mtdblock7 
+  160  ls /dev/mtd*
+  161  mtdinfo 
+  172  dd if=/dev/mtd0 bs=1 skip=1046528 count=17
+  173  dd if=/dev/mtd0 bs=1 skip=1046528 count=17|cat
+  174  dd if=/dev/mtd0 bs=1 skip=1046528 count=17 > macaddr.txt
+  178  dd if=/dev/mtdblock0 bs=1 skip=1046528 count=17 > macaddr.txt
+  408  dd if=/dev/mtd7 bs=1 count=100
+  409  dd if=/dev/mtd7 bs=1 count=1000
+  410  dd if=/dev/mtd7 bs=1 count=1000|hexdump
+  411  dd if=/dev/mtd7 bs=1 count=10900|hexdump
+  412  dd if=/dev/mtdblock7 bs=1 count=100
+  413  dd if=/dev/mtdblock7 bs=1 count=100|hexdump
+  414  hexdump /dev/mtdblock7 
+  415  hexdump /dev/mtdblock7 |grep 00c0
+  416  hexdump /dev/mtdblock7 |grep "00 c0"
+  417  hexdump /dev/mtdblock7 |grep "c0"
+  425  ubiattach -p /dev/mtd0
+  426  ubiattach -p /dev/mtd7
+  434  ubiattach -p /dev/mtd7
+  484  mtdinfo 
+  508  ubiattach -p /dev/mtd7
+  514* ubiattach -p /dev/mtd
+  518  ubinfo /dev/mtdblock7 
+  519  dmesg |grep mtd
+  520  history |grep mtd
+
+  mkfs.ubifs -r ubireserve2/  /dev/ubi0_0
