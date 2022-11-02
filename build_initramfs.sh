@@ -88,6 +88,8 @@ for param in \$(cat /proc/cmdline); do
 	esac
 done
 
+mdadm --assemble --scan
+
 # try to mount the root filesystem.
 if [ "\${root}"x != "/dev/ram"x ]; then
 	mount -t \${rootfstype} -o \${ro},\${rootflags} \${root} /newroot || rescue_shell "mount \${root} failed."
