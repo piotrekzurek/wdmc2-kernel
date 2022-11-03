@@ -37,11 +37,13 @@ cp $(ldd "/bin/busybox" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
 cp -a /sbin/e2fsck ${INITRAMFS_ROOT}/sbin/e2fsck
 cp $(ldd "/sbin/e2fsck" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
 
-cp -a /sbin/*btrfs ${INITRAMFS_ROOT}/sbin
 cp -a /bin/btrfs* ${INITRAMFS_ROOT}/bin
-cp -a /lib/x86_64-linux-gnu/liblzo2.so.2  ${INITRAMFS_ROOT}/lib/x86_64-linux-gnu/liblzo2.so.2
-cp -a /lib/x86_64-linux-gnu/libdl.so.2  ${INITRAMFS_ROOT}/lib/x86_64-linux-gnu/libdl.so.2
+cp -a /sbin/*btrfs ${INITRAMFS_ROOT}/sbin
+cp $(ldd "/bin/btrfs" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
+
 cp -a /sbin/mdadm ${INITRAMFS_ROOT}/sbin
+cp $(ldd "/sbin/mdadm" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
+
 
 cat << EOF > ${INITRAMFS_ROOT}/init
 #!/bin/busybox sh
