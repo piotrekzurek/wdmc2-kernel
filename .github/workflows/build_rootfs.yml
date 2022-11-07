@@ -16,7 +16,7 @@ on:
       kernelversion:
         description: 'Kernel version'     
         required: true
-        default: 'linux-5.18.y'
+        default: 'linux-6.0.y'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -43,7 +43,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: run rootfs build script with ghrunner config
-        run: sudo ./build.sh --ghrunner --rootfs --release bullseye --initramfs --root-pw 1234 --hostname wdmcex2u --zram --boot usb
+        run: sudo ./build.sh --ghrunner --rootfs --release bullseye --initramfs --root-pw 1234 --hostname wdmcex2u --zram --boot hdd
 
       # Upload build results
       - uses: actions/upload-artifact@v2

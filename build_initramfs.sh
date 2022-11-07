@@ -44,6 +44,7 @@ cp $(ldd "/bin/btrfs" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
 cp -a /sbin/mdadm ${INITRAMFS_ROOT}/sbin
 cp $(ldd "/sbin/mdadm" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
 
+cp -a /usr/local/bin/mcu_ctl ${INITRAMFS_ROOT}/bin
 
 cat << EOF > ${INITRAMFS_ROOT}/init
 #!/bin/busybox sh
@@ -71,13 +72,20 @@ mount -t devtmpfs none /dev || rescue_shell "mount /dev failed."
 mount -t proc none /proc || rescue_shell "mount /proc failed."
 mount -t sysfs none /sys || rescue_shell "mount /sys failed."
 
-ask_for_stop
-sleep 5
+
+#ask_for_stop
+#sleep 2
+
+# Set fan speed to quarter
+mcu_ctl fan_set_25
+
+btrfs device scan
+/sbin/mdadm --assemble --scan
 
 # get cmdline parameters
 init="/sbin/init"
 root=\$1
-rootflags=
+rootflags=\$2
 rootfstype=auto
 ro="ro"
 
@@ -92,45 +100,29 @@ for param in \$(cat /proc/cmdline); do
 	esac
 done
 
-/sbin/mdadm --assemble --scan
-
 # try to mount the root filesystem from kernel options
 if [ "\${root}"x != "/dev/ram"x ]; then
 	mount -t \${rootfstype} -o \${ro},\${rootflags} \${root} /newroot || rescue_shell "mount \${root} failed."
 fi
 
-# try 2nd partition on usb
-# if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ] && [ -b /dev/sda2 ]; then
-# 	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sda2 /newroot
-# 	if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ]; then
-# 		umount /dev/sda2
-# 	fi
-# fi
+try 2nd partition on usb
+if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ] && [ -b /dev/sda2 ]; then
+	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sda2 /newroot
+	if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ]; then
+		umount /dev/sda2
+	fi
+fi
 
-# # try 1st partition on hdd
-# if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ]; then
-# 	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sda1 /newroot
-# 	if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ]; then	
-# 		umount /dev/sda1
-# 	fi
-# fi
+# try 1st partition on hdd
+if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ]; then
+	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sda1 /newroot
+	if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ]; then	
+		umount /dev/sda1
+	fi
+fi
 
-
-# # try 3rd partition on hdd
-# if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ] && [ -b /dev/sda3 ]; then
-# 	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sda3 /newroot || rescue_shell "mount \${root} failed."
-# 	if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ]; then
-# 		umount /dev/sda3
-# 		rescue_shell "nothing bootable"
-# 	fi
-# fi
-
-# WD My Cloud: turn led solid blue
-#echo none > /sys/class/leds/system-blue/trigger
-#echo default-on > /sys/class/leds/system-green/trigger
-#echo ide-disk > /sys/class/leds/system-red/trigger
-
-# WD My Cloud: get mac from naip link set dev eth0 address \$(dd if=/dev/mtd0 bs=1 skip=1046528 count=17 2>/dev/null)
+# WD My Cloud: get mac from memory and set
+# ip link set dev eth0 address \$(dd if=/dev/ram bs=1 count=17 2>/dev/null)
 
 # clean up.
 umount /sys /proc /dev

@@ -1,7 +1,6 @@
 # Default mounts for usage with usb boot & root
 # file system   mount point     type    options                                                         dump    pass
 LABEL=usbrootfs       /               ext4    defaults,noatime,nodiratime,commit=600,errors=remount-ro        0       1
-#LABEL=usbbootfs       /boot           auto    defaults                                                        0       0
 
 proc            /proc           proc    defaults                                                        0       0
 devpts          /dev/pts        devpts  defaults,gid=5,mode=620                                         0       0
