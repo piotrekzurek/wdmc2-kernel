@@ -75,18 +75,18 @@ mount -t devtmpfs none /dev || rescue_shell "mount /dev failed."
 mount -t proc none /proc || rescue_shell "mount /proc failed."
 mount -t sysfs none /sys || rescue_shell "mount /sys failed."
 
-ubiattach /dev/ubi_ctrl -m 7 
+/sbin/ubiattach /dev/ubi_ctrl -m 7 
 mkdir -p /reserve2
 mount /dev/ubi0_0 /reserve2
 ip link set dev eth0 address $(cat /mnt/mac_addr)
 umount /reserve2
-ubidetach /dev/ubi_ctrl -m 7 
+/sbin/ubidetach /dev/ubi_ctrl -m 7 
 
 ask_for_stop
 sleep 2
 
 # Set fan speed to quarter
-mcu_ctl fan_set_25
+/bin/mcu_ctl fan_set_25
 
 btrfs device scan
 /sbin/mdadm --assemble --scan
