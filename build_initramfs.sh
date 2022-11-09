@@ -73,8 +73,8 @@ mount -t proc none /proc || rescue_shell "mount /proc failed."
 mount -t sysfs none /sys || rescue_shell "mount /sys failed."
 
 
-#ask_for_stop
-#sleep 2
+ask_for_stop
+sleep 2
 
 # Set fan speed to quarter
 mcu_ctl fan_set_25
@@ -87,7 +87,7 @@ init="/sbin/init"
 root=\$1
 rootflags=\$2
 rootfstype=auto
-ro="rw"
+ro="ro"
 
 for param in \$(cat /proc/cmdline); do
 	case \$param in
