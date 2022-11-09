@@ -78,7 +78,7 @@ mount -t sysfs none /sys || rescue_shell "mount /sys failed."
 /sbin/ubiattach /dev/ubi_ctrl -m 7 
 mkdir -p /reserve2
 mount /dev/ubi0_0 /reserve2
-ip link set dev eth0 address $(cat /mnt/mac_addr)
+ip link set dev eth0 address \$(cat /mnt/mac_addr)
 umount /reserve2
 /sbin/ubidetach /dev/ubi_ctrl -m 7 
 
