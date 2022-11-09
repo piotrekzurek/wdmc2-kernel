@@ -48,6 +48,7 @@ cp -a /usr/local/bin/mcu_ctl ${INITRAMFS_ROOT}/bin
 
 cp -a /usr/sbin/ubiattach ${INITRAMFS_ROOT}/sbin
 cp -a /usr/sbin/ubidetach ${INITRAMFS_ROOT}/sbin
+cp -a /sbin/findfs ${INITRAMFS_ROOT}/sbin
 
 cat << EOF > ${INITRAMFS_ROOT}/init
 #!/bin/busybox sh
