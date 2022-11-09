@@ -46,6 +46,8 @@ cp $(ldd "/sbin/mdadm" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
 
 cp -a /usr/local/bin/mcu_ctl ${INITRAMFS_ROOT}/bin
 
+cp -a /usr/sbin/ubiattach ${INITRAMFS_ROOT}/sbin
+
 cat << EOF > ${INITRAMFS_ROOT}/init
 #!/bin/busybox sh
 /bin/busybox --install
@@ -72,6 +74,12 @@ mount -t devtmpfs none /dev || rescue_shell "mount /dev failed."
 mount -t proc none /proc || rescue_shell "mount /proc failed."
 mount -t sysfs none /sys || rescue_shell "mount /sys failed."
 
+ubiattach /dev/ubi_ctrl -m 7 
+mkdir -p /reserve2
+mount /dev/ubi0_0 /reserve2
+ip link set dev eth0 address $(cat /mnt/mac_addr)
+umount /reserve2
+ubidetach /dev/ubi_ctrl -m 7 
 
 ask_for_stop
 sleep 2
