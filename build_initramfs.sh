@@ -47,8 +47,12 @@ cp $(ldd "/sbin/mdadm" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
 cp -a /usr/local/bin/mcu_ctl ${INITRAMFS_ROOT}/bin
 
 cp -a /usr/sbin/ubiattach ${INITRAMFS_ROOT}/sbin
+cp $(ldd "/usr/sbin/ubiattach" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
 cp -a /usr/sbin/ubidetach ${INITRAMFS_ROOT}/sbin
+cp $(ldd "/usr/sbin/ubiattach" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
+
 cp -a /sbin/findfs ${INITRAMFS_ROOT}/sbin
+cp $(ldd "/sbin/findfs" | egrep -o '/.* ') ${INITRAMFS_ROOT}/lib/
 
 cat << EOF > ${INITRAMFS_ROOT}/init
 #!/bin/busybox sh
