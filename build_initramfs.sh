@@ -82,14 +82,14 @@ ip link set dev eth0 address \$(cat /mnt/mac_addr)
 umount /reserve2
 /sbin/ubidetach /dev/ubi_ctrl -m 7 
 
-ask_for_stop
-sleep 2
-
 # Set fan speed to quarter
 /bin/mcu_ctl fan_set_25
 
 btrfs device scan
 /sbin/mdadm --assemble --scan
+
+ask_for_stop
+sleep 2
 
 # get cmdline parameters
 init="/sbin/init"
