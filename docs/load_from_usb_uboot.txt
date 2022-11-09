@@ -9,7 +9,7 @@ setenv mtdparts 'mtdparts=armada-nand:5m(u-boot)ro,5m@5m(uImage),5m@10m(uRamdisk
 
 setenv mtdparts 'mtdparts=armada-nand:5m(u-boot)ro,5m@5m(uImage),5m@10m(uRamdisk),5m@15m(uImage-old),5m@20m(uRamdisk-old),5m@25m(uImage-test),5m@30m(uRamdisk-test),220m@35m(reserve2)'
 
-setenv bootargs 'root=LABEL=btrfsraid1 rootflags=subvol=rootfs console=ttyS0,115200 earlyprintk=serial'
+setenv bootargs 'root=/dev/sdb1 rootflags=subvol=rootfs console=ttyS0,115200 earlyprintk=serial'
 boot
 exec switch_root /newroot /sbin/init
 

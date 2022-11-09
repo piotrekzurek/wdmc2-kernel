@@ -87,7 +87,7 @@ init="/sbin/init"
 root=\$1
 rootflags=\$2
 rootfstype=auto
-ro="ro"
+ro="rw"
 
 for param in \$(cat /proc/cmdline); do
 	case \$param in
