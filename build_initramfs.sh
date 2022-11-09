@@ -111,11 +111,13 @@ done
 
 # try to mount the root filesystem from kernel options
 if [ "\${root}"x != "/dev/ram"x ]; then
+    echo "Trying to mount root filesystem using kernel options"
 	mount -t \${rootfstype} -o \${ro},\${rootflags} \$(findfs LABEL=\${root}) /newroot || rescue_shell "mount \${root} failed."
 fi
 
 try 2nd partition on usb
 if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ] && [ -b /dev/sda2 ]; then
+    echo "Trying to mount root filesystem from USB 2nd partition"
 	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sda2 /newroot
 	if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ]; then
 		umount /dev/sda2
@@ -124,7 +126,9 @@ fi
 
 # try 1st partition on hdd
 if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ]; then
-	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sda1 /newroot
+    echo "Trying to mount root filesystem using currently mapped /dev/sdb1"
+    echo " - usually this will be 2nd's disk first partition"
+	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sdb1 /newroot
 	if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ]; then	
 		umount /dev/sda1
 	fi
