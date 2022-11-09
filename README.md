@@ -3,11 +3,10 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=HXWRU82YBV7HC&source=url)
 
-* mainline kernel support tested with 4.18 / 5.6 / 5.6 / 5.8 / 5.10 / 5.11 / 5.12 / 5.13 / 5.14 / 5.15
+* mainline kernel support tested with 5.18 / 6.0
 	- device tree source ./dts/armada-385-wdmc-Ex2-Ultra.dts
 	- kernel config for various kernels included check ./config/
 	- some tweaks and pointers in txt files ./docs/
-	- toolchain for building old kernels is included as txz ./toolchain/ . I suggest using the gcc-arm-none-eabi toolchain via apt!
 	- supports caching of kernel and rootfs so not everything needs to be rebuilt everytime
 	- built rootfs has zram support and uses it for swap and logging
 	
@@ -15,9 +14,6 @@
 	- buildscript has been developed and tested on Ubuntu Hirsute (21.04) with gcc-arm-none-eabi (https://packages.ubuntu.com/hirsute/gcc-arm-none-eabi) hosted in a VirtualBox, there are known problems when using older debian/ubuntu releases or wsl(2)
 	- `apt-get install build-essential bc libncurses5 dialog u-boot-tools git libncurses-dev lib32z1 lib32ncurses5-dev libmpc-dev libmpfr-dev libgmp3-dev flex bison debootstrap debian-archive-keyring qemu-user-static`
 	- gcc for arm eabi `apt-get install gcc-arm-none-eabi`
-		- OR (ONLY USE IF ABOVE DOES NOT WORK)
-		- extract the gcc/glibc archive from toolchain to /opt
-		- adjust the path to the gcc in build.sh
 
 * build.sh
 	- provides a way of building a kernel, rootfs and uRamdisk
