@@ -117,7 +117,7 @@ done
 # try to mount the root filesystem from kernel options
 if [ "\${root}"x != "/dev/ram"x ]; then
     echo "Trying to mount root filesystem using kernel options"
-	mount -t \${rootfstype} -o \${ro},\${rootflags} \$(findfs LABEL=\${root}) /newroot || rescue_shell "mount \${root} failed."
+	mount -t \${rootfstype} -o \${ro},\${rootflags} \$(findfs \${root}) /newroot || rescue_shell "mount \${root} failed."
 fi
 
 try 2nd partition on usb
