@@ -83,7 +83,7 @@ mount -t sysfs none /sys || rescue_shell "mount /sys failed."
 /sbin/ubiattach /dev/ubi_ctrl -m 7 
 mkdir -p /reserve2
 mount -t ubifs /dev/ubi0_0 /reserve2
-ip link set dev eth0 address \$(cat /mnt/mac_addr)
+ip link set dev eth0 address \$(cat /reserve2/mac_addr)
 umount /reserve2
 /sbin/ubidetach /dev/ubi_ctrl -m 7 
 
@@ -138,9 +138,6 @@ if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ];
 		umount /dev/sda1
 	fi
 fi
-
-# WD My Cloud: get mac from memory and set
-# ip link set dev eth0 address \$(dd if=/dev/ram bs=1 count=17 2>/dev/null)
 
 # clean up.
 umount /sys /proc /dev
