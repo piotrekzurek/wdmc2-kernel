@@ -120,7 +120,7 @@ if [ "\${root}"x != "/dev/ram"x ]; then
 	mount -t \${rootfstype} -o \${ro},\${rootflags} \$(findfs \${root}) /newroot || rescue_shell "mount \${root} failed."
 fi
 
-try 2nd partition on usb
+# try 2nd partition on usb
 if [ ! -x /newroot/\${init} ] && [ ! -h /newroot/\${init} ] && [ -b /dev/sda1 ] && [ -b /dev/sda2 ]; then
     echo "Trying to mount root filesystem from USB 2nd partition"
 	mount -t \${rootfstype} -o \${ro},\${rootflags} /dev/sda2 /newroot
