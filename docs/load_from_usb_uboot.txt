@@ -165,3 +165,12 @@ dd if=/boot/uRamdisk.test of=/dev/mtdblock6
   520  history |grep mtd
 
   mkfs.ubifs -r ubireserve2/  /dev/ubi0_0
+
+  watch -n 0.2 'echo $(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000)) "\t"'
+
+
+# Configuration file for fw_(printenv/setenv) utility.
+# Up to two entries are valid, in this case the redundant
+# environment sector is assumed present.
+# MTD device name       Device offset   Env. size       Flash sector size
+/dev/mtd0               0x100000        0x80000         0x20000      4
