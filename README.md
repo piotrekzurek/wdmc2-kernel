@@ -1,6 +1,6 @@
-# build tools for wdmc-gen2
-## WD My Cloud Gen2 based on Marvell ARMADA 385
-
+# build tools for wdmcex2u
+## WD My Cloud EX 2 Ultra based on Marvell ARMADA 385
+(forked and modified from the original Heisath/wdmc2-kernel)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=HXWRU82YBV7HC&source=url)
 
 * mainline kernel support tested with 5.18 / 6.0
