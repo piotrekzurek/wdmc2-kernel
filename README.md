@@ -90,7 +90,7 @@
 * how to debug
 
 	If you get stuck at any point it is really helpful to access the boot log and watch uboot and the uRamdisk do its stuff. You can connect a 3.3V usb-serial converter (also often referred to as FTDI Breakout or USB2UART) to the UART pins on the wdmc. The wdmc is using 115200b8n1 with 3.3V pullups on the data lines. Use the image below for reference (also check the docs folder!) 
-	![image](https://github.com/Heisath/wdmc2-kernel/blob/master/docs/UART_Pinout.jpg)
+	WDMCEX2Ultra image will go here :)
 		
 Thanks to: \
 AllesterFox (http://anionix.ddns.net/WDMyCloud/WDMyCloud-Gen2/) \
