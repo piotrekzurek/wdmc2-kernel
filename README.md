@@ -3,7 +3,7 @@
 (forked and modified from the original Heisath/wdmc2-kernel)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=HXWRU82YBV7HC&source=url)
 
-* mainline kernel support tested with 5.18 / 6.0
+* mainline kernel support tested with 5.18 / 6.0 / 6.1
 	- device tree source ./dts/armada-385-wdmc-Ex2-Ultra.dts
 	- kernel config for various kernels included check ./config/
 	- some tweaks and pointers in txt files ./docs/

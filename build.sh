@@ -115,6 +115,7 @@ if [[ $BUILD_KERNEL == "on" ]] && [ -z "$kernel_branch" ]; then
     display_select "Kernel Building" "Please select the Linux Kernel branch to build." \
         "5.18" "Linux kernel 5.18" \
         "6.0" "Linux kernel 6.0" \
+        "6.1" "Linux kernel 6.1" \
 
     kernel_branch="linux-$selection.y"
 fi
