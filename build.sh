@@ -116,7 +116,8 @@ if [[ $BUILD_KERNEL == "on" ]] && [ -z "$kernel_branch" ]; then
         "5.18" "Linux kernel 5.18" \
         "6.0" "Linux kernel 6.0" \
         "6.1" "Linux kernel 6.1" \
-
+        "6.2" "Linux kernel 6.2" \
+        
     kernel_branch="linux-$selection.y"
 fi
 BACKTITLE+=" | "${kernel_branch}
